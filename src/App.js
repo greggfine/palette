@@ -16,6 +16,7 @@ class App extends Component {
     this.handleChange=this.handleChange.bind(this)
     this.handleKeyPress=this.handleKeyPress.bind(this)
     this.handleClear=this.handleClear.bind(this)
+    this.clearInstrument=this.clearInstrument.bind(this)
   }
 
   handleChange(e){
@@ -41,9 +42,16 @@ class App extends Component {
     })
   }
 
-  componentDidUpdate(){
-    console.log(this.state.instruments)
+  clearInstrument(e, index){
+    this.setState((prevState)=> {
+      return{
+        instruments: prevState.instruments.filter((instrument)=> {
+          return instrument !== prevState.instruments[index]
+        })
+      }
+    })
   }
+
 
   render() {
     const { userInput, instruments } = this.state
@@ -55,7 +63,10 @@ class App extends Component {
             handleKeyPress={ this.handleKeyPress }
             userInput={ userInput }
         />
-        <InstrumentList instruments={ instruments }/>
+        <InstrumentList 
+            instruments={ instruments }
+            clearInstrument={ this.clearInstrument }
+          />
         <ClearAllBtn handleClear={ this.handleClear }/>
       </div>
     );

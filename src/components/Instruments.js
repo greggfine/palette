@@ -1,9 +1,14 @@
 import React from 'react';
-import './Instrument.css';
+import './Instruments.css';
 
-const Instrument = ({ instruments }) => (
-		instruments.map((instrument) => {
-			return <li key={ instrument }> { instrument } </li>
+const Instrument = ({ instruments, clearInstrument }) => (
+		instruments.map((instrument, index) => {
+			return <li 
+						key={ instrument }> 
+						{ instrument } 
+						<span
+							onClick={(e) => clearInstrument(e, index) }>x</span>
+					</li>
 		})
 	)
 
